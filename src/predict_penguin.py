@@ -8,7 +8,7 @@ import os
 model_path = "models/model.pkl"
 label_encoder_path = "models/le.pkl"
 scaler_path = "models/scaler.pkl"
-json_output_path = "data/penguin_prediction.json"
+json_output_path = "docs/penguin_prediction.json"  # Instead of "data/"
 
 # Check if model files exist
 if not all(os.path.exists(f) for f in [model_path, label_encoder_path, scaler_path]):
