@@ -118,17 +118,17 @@
             const predictionBox = document.getElementById("prediction");
             button.innerHTML = "Predicting... ⏳";
             button.disabled = true;
-
+        
             predictionBox.style.display = "block";
             predictionBox.innerHTML = `
                 <div class="spinner"></div>
                 <p class='loading'>Fetching today's penguin species...</p>
             `;
-
+        
             try {
-                const response = await fetch('penguin_prediction.json'); 
+                const response = await fetch('data/penguin_prediction.json');  // Updated path
                 const data = await response.json();
-                
+        
                 predictionBox.innerHTML = `
                     <h2>🐧 Today's Penguin Prediction</h2>
                     <p class="prediction-info"><span class="highlight">📅 Date & Time:</span> ${data.datetime}</p>
@@ -141,17 +141,7 @@
             } catch (error) {
                 predictionBox.innerHTML = "<p class='loading'>⚠️ Failed to load prediction. Please try again later.</p>";
             }
-
+        
             button.innerHTML = "Predict Again 🐧";
             button.disabled = false;
-        }
-    </script>
-</head>
-<body>
-    <div class="container">
-        <h2>Predict the Species of Today's Penguin in NY</h2>
-        <button id="predict-btn" class="btn" onclick="loadPrediction()">Predict 🐧</button>
-        <div id="prediction" class="prediction-box"></div>
-    </div>
-</body>
-</html>
+        }        

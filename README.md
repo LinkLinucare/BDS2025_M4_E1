@@ -1,122 +1,92 @@
-🐧 Penguin AI Prediction Project
+<h2>🚀 Project Overview</h2>
+<ul>
+    <li>Utilizes a <strong>Random Forest model</strong> to classify penguin species.</li>
+    <li><strong>GitHub Actions automation</strong> updates predictions daily at 7:30 AM.</li>
+    <li><strong>SQLite database</strong> stores penguin data.</li>
+    <li><strong>Frontend:</strong> A static HTML page fetches and displays daily predictions.</li>
+    <li><strong>Optional Streamlit App:</strong> Allows users to input penguin features for real-time classification.</li>
+</ul>
 
-This project predicts the species of a penguin based on its physical characteristics. A trained machine learning model is used to generate daily predictions, which are stored in a JSON file and displayed on a simple frontend.
-
-🚀 Project Overview
-
-Utilizes a Random Forest model to classify penguin species.
-
-GitHub Actions automation updates predictions daily at 7:30 AM.
-
-SQLite database stores penguin data.
-
-Frontend: A static HTML page fetches and displays daily predictions.
-
-Optional Streamlit App: Allows users to input penguin features for real-time classification.
-
-📂 Project Structure
-
+<h2>📂 Project Structure</h2>
+<pre>
+<code>
 BDS_2025_M4_Exercise_1/
-│── .github/workflows/        # GitHub Actions workflows
+├── .github/workflows/        # GitHub Actions workflows
 │   ├── fetch_and_predict.yml  # Automates daily data fetching and predictions
 │
-│── data/                     # Data storage
+├── data/                     # Data storage
 │   ├── penguins.db            # SQLite database containing penguin data
 │   ├── penguin_prediction.json # Daily updated JSON with the latest prediction
 │
-│── models/                   # Trained model and preprocessing tools
+├── models/                   # Trained model and preprocessing tools
 │   ├── model.pkl              # Random Forest model
 │   ├── le.pkl                 # Label encoder
 │   ├── scaler.pkl             # Scaler for feature normalization
 │
-│── src/                      # Python scripts for data processing and modeling
+├── src/                      # Python scripts for data processing and modeling
 │   ├── data_to_db.py          # Converts raw data into SQLite database
 │   ├── train_model.py         # Trains the ML model
 │   ├── predict_penguin.py     # Generates daily predictions
 │
-│── index.html                 # Frontend webpage displaying predictions
-│── README.md                   # Project documentation
-│── requirements.txt            # Dependencies
+├── index.html                 # Frontend webpage displaying predictions
+├── README.md                   # Project documentation
+├── requirements.txt            # Dependencies
+</code>
+</pre>
 
-⚙️ How It Works
+<h2>⚙️ How It Works</h2>
+<ol>
+    <li><strong>Data Processing:</strong> `data_to_db.py` processes the raw penguin dataset and stores it in `penguins.db`.</li>
+    <li><strong>Model Training:</strong> `train_model.py` trains a <strong>Random Forest classifier</strong> to predict penguin species.</li>
+    <li><strong>Daily Predictions:</strong> `fetch_and_predict.yml` fetches the latest data and updates `penguin_prediction.json` daily.</li>
+    <li><strong>Frontend Display:</strong> `index.html` fetches `penguin_prediction.json` and displays the latest prediction using JavaScript.</li>
+</ol>
 
-1️⃣ Data Processing
+<h2>📦 Installation & Setup</h2>
+<pre>
+<code>
+# Clone the Repository
+git clone https://github.com/LinkLinucare/BDS2025_M4_E1.git
+cd BDS2025_M4_E1
 
-data_to_db.py processes the raw penguin dataset and stores it in penguins.db.
-
-2️⃣ Model Training
-
-train_model.py trains a Random Forest classifier to predict penguin species.
-
-The trained model is stored in models/model.pkl.
-
-3️⃣ Daily Predictions (Automated via GitHub Actions)
-
-fetch_and_predict.yml runs every morning to:
-
-Fetch the latest penguin data.
-
-Use predict_penguin.py to generate a new prediction.
-
-Save the prediction to data/penguin_prediction.json.
-
-4️⃣ Frontend Display
-
-The index.html file fetches penguin_prediction.json and displays the latest prediction using JavaScript.
-
-📦 Installation & Setup
-
-1️⃣ Clone the Repository
-
-git clone https://github.com/your-username/BDS_2025_M4_Exercise_1.git
-cd BDS_2025_M4_Exercise_1
-
-2️⃣ Install Dependencies
-
+# Install Dependencies
 pip install -r requirements.txt
 
-3️⃣ Prepare the Database
-
+# Prepare the Database
 python src/data_to_db.py
 
-4️⃣ Train the Model (Only Needed for Retraining)
-
+# Train the Model (Only Needed for Retraining)
 python src/train_model.py
 
-5️⃣ Generate a Prediction
-
+# Generate a Prediction
 python src/predict_penguin.py
+</code>
+</pre>
 
-🌐 Hosting the Frontend with GitHub Pages
+<h2>🌐 Hosting the Frontend with GitHub Pages</h2>
+<p>To host `index.html` using <strong>GitHub Pages</strong>:</p>
+<ol>
+    <li><strong>Move `index.html` to the `docs/` directory.</strong></li>
+    <li>In GitHub:
+        <ul>
+            <li>Go to <strong>Settings > Pages</strong>.</li>
+            <li>Set the source branch to <strong>main</strong> and folder to <strong>/docs</strong>.</li>
+            <li>Click "Save" to deploy.</li>
+        </ul>
+    </li>
+</ol>
+<p>Your project will be available at:</p>
+<pre><code>https://LinkLinucare.github.io/BDS2025_M4_E1/</code></pre>
 
-To host index.html using GitHub Pages:
+<h2>📌 Notes</h2>
+<ul>
+    <li>`penguin_prediction.json` is updated <strong>automatically every day</strong>, so avoid manual modifications.</li>
+    <li>The frontend fetches the JSON file from `/penguin_prediction.json`, so ensure it exists.</li>
+</ul>
 
-Move index.html to the docs/ directory
-
-In GitHub:
-
-Go to Settings > Pages.
-
-Set the source branch to main and folder to /docs.
-
-Click "Save" to deploy.
-
-Your project will be available at:
-
-https://your-username.github.io/BDS_2025_M4_Exercise_1/
-
-📌 Notes
-
-penguin_prediction.json is updated automatically every day, so avoid manual modifications.
-
-The frontend fetches the JSON file from /data/penguin_prediction.json, so ensure it exists.
-
-🛠 Future Improvements
-
-Improve model accuracy with additional training data.
-
-Add a Streamlit backend for real-time input predictions.
-
-Enhance the UI for a better user experience.
-
-🚀 Happy Coding! 🐧
+<h2>🛠 Future Improvements</h2>
+<ul>
+    <li>Improve model accuracy with additional training data.</li>
+    <li>Add a Streamlit backend for real-time input predictions.</li>
+    <li>Enhance the UI for a better user experience.</li>
+</ul>
