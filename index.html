@@ -126,7 +126,7 @@
             `;
 
             try {
-                const response = await fetch('data/penguin_prediction.json'); // ✅ Updated path
+                const response = await fetch('penguin_prediction.json'); 
                 const data = await response.json();
                 
                 predictionBox.innerHTML = `
