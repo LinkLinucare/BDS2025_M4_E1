@@ -1,147 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Penguin Prediction</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Penguin Prediction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
 
-        body {
-            background: linear-gradient(135deg, #74ebd5, #acb6e5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding: 20px;
-        }
+    body {
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
 
-        .container {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            max-width: 420px;
-            width: 100%;
-            color: #2c3e50;
-            transition: all 0.3s ease-in-out;
-        }
+    .container {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      color: #2c3e50;
+      transition: all 0.3s ease-in-out;
+    }
 
-        .container:hover {
-            transform: scale(1.02);
-        }
+    .container:hover {
+      transform: scale(1.02);
+    }
 
-        h2 {
-            font-weight: 600;
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: #333;
-        }
+    h2 {
+      font-weight: 600;
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #333;
+    }
 
-        .btn {
-            background: #3498db;
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 15px;
-        }
+    .btn {
+      background: #3498db;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-top: 15px;
+    }
 
-        .btn:hover {
-            background: #2980b9;
-            transform: scale(1.05);
-        }
+    .btn:hover {
+      background: #2980b9;
+      transform: scale(1.05);
+    }
 
-        .btn img {
-            width: 25px;
-            height: 25px;
-            margin-left: 10px;
-        }
+    .btn img {
+      width: 25px;
+      height: 25px;
+      margin-left: 10px;
+    }
 
-        .prediction-box {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
+    .prediction-box {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
 
-        .highlight {
-            font-weight: bold;
-            color: #3498db;
-        }
+    .highlight {
+      font-weight: bold;
+      color: #3498db;
+    }
 
-        .loading {
-            font-style: italic;
-            color: #666;
-            font-size: 18px;
-        }
+    .loading {
+      font-style: italic;
+      color: #666;
+      font-size: 18px;
+    }
 
-        .spinner {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(255, 255, 255, 0.6);
-            border-top-color: #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 10px auto;
-        }
+    .spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255, 255, 255, 0.6);
+      border-top-color: #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-    </style>
-    <script>
-        async function loadPrediction() {
-            const button = document.getElementById("predict-btn");
-            const predictionBox = document.getElementById("prediction");
-            button.innerHTML = "Predicting... ⏳";
-            button.disabled = true;
-        
-            predictionBox.style.display = "block";
-            predictionBox.innerHTML = `
-                <div class="spinner"></div>
-                <p class='loading'>Fetching today's penguin species...</p>
-            `;
-        
-            try {
-                const response = await fetch('https://linklinucare.github.io/BDS2025_M4_E1/data/penguin_prediction.json');
-                const data = await response.json();
-        
-                predictionBox.innerHTML = `
-                    <h2>🐧 Today's Penguin Prediction</h2>
-                    <p class="prediction-info"><span class="highlight">📅 Date & Time:</span> ${data.datetime}</p>
-                    <p class="prediction-info"><span class="highlight">📏 Bill Length:</span> ${data.bill_length_mm} mm</p>
-                    <p class="prediction-info"><span class="highlight">📏 Bill Depth:</span> ${data.bill_depth_mm} mm</p>
-                    <p class="prediction-info"><span class="highlight">🏊 Flipper Length:</span> ${data.flipper_length_mm} mm</p>
-                    <p class="prediction-info"><span class="highlight">⚖️ Body Mass:</span> ${data.body_mass_g} g</p>
-                    <p class="prediction-info"><span class="highlight">🔍 Predicted Species:</span> <strong>${data.predicted_species}</strong></p>
-                `;
-            } catch (error) {
-                predictionBox.innerHTML = "<p class='loading'>⚠️ Failed to load prediction. Please try again later.</p>";
-            }
-        
-            button.innerHTML = "Predict Again 🐧";
-            button.disabled = false;
-        }        
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <script>
+    async function loadPrediction() {
+      const button = document.getElementById("predict-btn");
+      const predictionBox = document.getElementById("prediction");
+      button.innerHTML = "Predicting... ⏳";
+      button.disabled = true;
+
+      predictionBox.style.display = "block";
+      predictionBox.innerHTML = `
+        <div class="spinner"></div>
+        <p class='loading'>Fetching today's penguin species...</p>
+      `;
+
+      try {
+        const response = await fetch(
+          "https://linklinucare.github.io/BDS2025_M4_E1/data/penguin_prediction.json"
+        );
+        const data = await response.json();
+
+        predictionBox.innerHTML = `
+          <h2>🐧 Today's Penguin Prediction</h2>
+          <p class="prediction-info"><span class="highlight">📅 Date & Time:</span> ${data.datetime}</p>
+          <p class="prediction-info"><span class="highlight">📏 Bill Length:</span> ${data.bill_length_mm} mm</p>
+          <p class="prediction-info"><span class="highlight">📏 Bill Depth:</span> ${data.bill_depth_mm} mm</p>
+          <p class="prediction-info"><span class="highlight">🏊 Flipper Length:</span> ${data.flipper_length_mm} mm</p>
+          <p class="prediction-info"><span class="highlight">⚖️ Body Mass:</span> ${data.body_mass_g} g</p>
+          <p class="prediction-info"><span class="highlight">🔍 Predicted Species:</span> <strong>${data.predicted_species}</strong></p>
+        `;
+      } catch (error) {
+        predictionBox.innerHTML =
+          "<p class='loading'>⚠️ Failed to load prediction. Please try again later.</p>";
+      }
+
+      button.innerHTML = "Predict Again 🐧";
+      button.disabled = false;
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Predict the Species of Today's Penguin in NY</h2>
+    <button id="predict-btn" class="btn" onclick="loadPrediction()">Predict 🐧</button>
+    <div id="prediction" class="prediction-box"></div>
+  </div>
+</body>
+</html>
